@@ -8,14 +8,14 @@ Welcome to **FinTracker**! This project combines cutting-edge AI technology with
 
 ## ✨ Core Features
 
-	✅ **AI Chatbot**: Intelligent financial assistant powered by Google Gemini AI
-	✅ **Real-time Data**: Live stock quotes, market data, and financial news via Alpha Vantage
-	✅ **Smart Query Processing**: Natural language understanding for complex financial queries
-	✅ **Market Analysis**: Top gainers/losers, technical indicators (RSI), and trend analysis
-	✅ **Multi-format Data**: Beautiful tables, charts, and markdown-formatted responses
-	✅ **Universal Knowledge**: Handles both financial data and general educational queries
-	✅ **Modern UI**: Sleek React frontend with dark theme and responsive design
-	✅ **Team Showcase**: Professional About Us page with team member profiles
+	✅ AI Chatbot: Intelligent financial assistant powered by Google Gemini AI
+	✅ Real-time Data: Live stock quotes, market data, and financial news via Alpha Vantage
+	✅ Smart Query Processing: Natural language understanding for complex financial queries
+	✅ Market Analysis: Top gainers/losers, technical indicators (RSI), and trend analysis
+	✅ Multi-format Data: Beautiful tables, charts, and markdown-formatted responses
+	✅ Universal Knowledge: Handles both financial data and general educational queries
+	✅ Modern UI: Sleek React frontend with dark theme and responsive design
+	✅ Team Showcase: Professional About Us page with team member profiles
 
 -----
 
@@ -111,9 +111,9 @@ curl -X POST "http://localhost:8002/query" \
 
 ### Frontend Testing
 
-	💬 **Chatbot Interface**: `http://localhost:3000/main`
-	👥 **About Us Page**: `http://localhost:3000/aboutus`
-	🏠 **Landing Page**: `http://localhost:3000/`
+	💬 Chatbot Interface: `http://localhost:3000/main`
+	👥 About Us Page: `http://localhost:3000/aboutus`
+	🏠 Landing Page: `http://localhost:3000/`
 
 -----
 
@@ -121,21 +121,21 @@ curl -X POST "http://localhost:8002/query" \
 
 ### Query Examples
 
-	**Stock Data** 📈
+	*Stock Data* 📈
 	- `"quote AAPL"` - Get current Apple stock price
 	- `"daily MSFT"` - Microsoft daily data
 	- `"intraday TSLA 5min"` - Tesla 5-minute intervals
 
-	**Market Analysis** 📊
+	*Market Analysis* 📊
 	- `"top gainers"` - Best performing stocks
 	- `"top losers"` - Worst performing stocks  
 	- `"most active stocks"` - High volume trading
 
-	**Technical Analysis** 🔍
+	*Technical Analysis* 🔍
 	- `"RSI AAPL daily"` - Relative Strength Index
 	- `"AAPL price history"` - Historical price data
 
-	**AI Assistant** 🤖
+	*AI Assistant* 🤖
 	- `"explain diversification"` - Financial education
 	- `"latest market news"` - AI-powered market insights
 	- `"what is compound interest?"` - Educational content
