@@ -476,6 +476,77 @@ def summarize_result(tool: str, result: Any, params: Dict[str, Any] = None) -> A
             table = _format_table(quotes, "Real-time Quotes", ["symbol", "price", "change", "change_%", "volume"])
             return {"raw": parsed, "markdown": table, "quotes": quotes}
 
+    # Handle single stock quote (GLOBAL_QUOTE)
+    if tool == "GLOBAL_QUOTE" and isinstance(parsed, dict):
+        # Check if we have content with CSV-like text data
+        if "content" in parsed and isinstance(parsed["content"], list):
+            for item in parsed["content"]:
+                if item.get("type") == "text":
+                    csv_text = item.get("text", "")
+                    lines = csv_text.strip().split('\n')
+                    if len(lines) >= 2:  # Header + data
+                        headers = lines[0].split(',')
+                        data = lines[1].split(',')
+                        
+                        if len(headers) == len(data):
+                            # Create a dictionary from CSV data
+                            stock_data = dict(zip(headers, data))
+                            
+                            # Extract and format the data
+                            symbol = stock_data.get('symbol', 'N/A')
+                            price = float(stock_data.get('price', 0))
+                            open_price = float(stock_data.get('open', 0))
+                            high = float(stock_data.get('high', 0))
+                            low = float(stock_data.get('low', 0))
+                            volume = int(stock_data.get('volume', 0))
+                            change = float(stock_data.get('change', 0))
+                            change_percent = stock_data.get('changePercent', '0%').replace('%', '')
+                            previous_close = float(stock_data.get('previousClose', 0))
+                            latest_day = stock_data.get('latestDay', 'N/A')
+                            
+                            # Determine if stock is up or down
+                            trend_emoji = "📈" if change >= 0 else "📉"
+                            change_color = "🟢" if change >= 0 else "🔴"
+                            
+                            # Format the markdown response
+                            markdown = f"""## {trend_emoji} {symbol} Stock Quote
+                            
+**Current Price:** ${price:.2f} {change_color}
+
+**Daily Performance:**
+- **Change:** ${change:+.2f} ({change_percent:+}%)
+- **Previous Close:** ${previous_close:.2f}
+
+**Trading Range:**
+- **Open:** ${open_price:.2f}
+- **High:** ${high:.2f}
+- **Low:** ${low:.2f}
+
+**Volume:** {volume:,} shares
+
+**Last Updated:** {latest_day}
+
+---
+*Data provided by Alpha Vantage*"""
+                            
+                            return {
+                                "raw": parsed,
+                                "markdown": markdown,
+                                "symbol": symbol,
+                                "price": price,
+                                "change": change,
+                                "change_percent": float(change_percent),
+                                "volume": volume,
+                                "last_updated": latest_day
+                            }
+        
+        # Fallback if parsing fails
+        return {
+            "raw": parsed,
+            "markdown": f"📊 **Stock Quote**\n\nReceived data for stock quote, but formatting is not available.",
+            "error": "Could not parse stock quote data"
+        }
+
     return parsed
 
 
